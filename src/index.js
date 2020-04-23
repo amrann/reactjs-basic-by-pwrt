@@ -4,13 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const HelloWorld = () => {
-  return <p>Hello world</p>
-}
+// Video #5
+import HaloKomponen from './komponen/HaloKomponen'
+import StetFulKomponen from './kontainer/StetFulKomponen'
+// end-Video #5
 
 ReactDOM.render(
   <React.StrictMode>
-    <HelloWorld />
+    {/* Video #5 */}
+    <HaloKomponen />
+    <StetFulKomponen />
+    {/* end-Video #5 */}
   </React.StrictMode>,
   document.getElementById('root')
 );
