@@ -9,12 +9,20 @@ import HaloKomponen from './komponen/HaloKomponen'
 import StetFulKomponen from './kontainer/StetFulKomponen'
 // end-Video #5
 
+// Video #6
+import Beranda from './kontainer/Beranda';
+// end-Video #6
+
 ReactDOM.render(
   <React.StrictMode>
     {/* Video #5 */}
-    <HaloKomponen />
-    <StetFulKomponen />
+    {/* <HaloKomponen />
+    <StetFulKomponen /> */}
     {/* end-Video #5 */}
+
+    {/* Video #6 */}
+    <Beranda/>
+    {/* end-Video #6 */}    
   </React.StrictMode>,
   document.getElementById('root')
 );
