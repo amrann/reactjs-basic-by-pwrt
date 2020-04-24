@@ -21,18 +21,33 @@ import React, {Component} from 'react';
 // end-Video #6
 
 // Video #7
-import YutupKomponen from '../komponen/YutupKomponen';
-import Produk from './Produk';
+// import Produk from './Produk';
+// class Beranda extends Component {
+//     render(){
+//         return(
+//             <div>
+//                 <p>Counter</p>
+//                 <hr/>
+//                 <Produk/>
+//             </div>
+//         ) 
+//     }
+// }
+// export default Beranda;
+// end-Video #7
+
+// Video #8
+import LifeCycleKomponen from './LifeCycleKomponen';
 class Beranda extends Component {
     render(){
         return(
             <div>
-                <p>Counter</p>
+                <p>Life Cycle Komponen</p>
                 <hr/>
-                <Produk/>
+                <LifeCycleKomponen/>
             </div>
         ) 
     }
 }
 export default Beranda;
-// end-Video #7
+// end-Video #8
