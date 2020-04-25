@@ -21,9 +21,9 @@ class CardProduk extends Component{
             pesan: this.state.pesan + 1   
         }, () => {
             this.hendelCounterChangeChild(this.state.pesan);
-        })
-        
+        }) 
     }
+
     // function pada umumnya
     // namun penggunaan function seperti ini tidak disarankan karena nntinya akan undefined
     // hendelMinus(){

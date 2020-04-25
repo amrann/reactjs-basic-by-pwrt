@@ -37,17 +37,33 @@ import React, {Component} from 'react';
 // end-Video #7
 
 // Video #8
-import LifeCycleKomponen from './LifeCycleKomponen';
+// import LifeCycleKomponen from './LifeCycleKomponen';
+// class Beranda extends Component {
+//     render(){
+//         return(
+//             <div>
+//                 <p>Life Cycle Komponen</p>
+//                 <hr/>
+//                 <LifeCycleKomponen/>
+//             </div>
+//         ) 
+//     }
+// }
+// export default Beranda;
+// end-Video #8
+
+// Video #10
+import BlogPost from './BlogPost';
 class Beranda extends Component {
     render(){
         return(
             <div>
-                <p>Life Cycle Komponen</p>
+                <p>Blog Post</p>
                 <hr/>
-                <LifeCycleKomponen/>
+                <BlogPost/>
             </div>
         ) 
     }
 }
 export default Beranda;
-// end-Video #8
+// end-Video #10
