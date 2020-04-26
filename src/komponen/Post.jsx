@@ -1,5 +1,22 @@
 import React from 'react';
 // Video #10
+// const Post = (props) => { 
+//     return (
+//         <div className="post">
+//             <div className="img-thumb">
+//                 <img src="http://placeimg.com/200/150/tech"/>
+//             </div>
+//             <div className="content">
+//                 <p className="title">Dummy title</p>
+//                 <p className="desc">Dummy description</p>
+//             </div>
+//         </div>
+//     )
+// }
+// export default Post;
+// end-Video #10
+
+// Video #11
 const Post = (props) => { 
     return (
         <div className="post">
@@ -7,11 +24,11 @@ const Post = (props) => {
                 <img src="http://placeimg.com/200/150/tech"/>
             </div>
             <div className="content">
-                <p className="title">Dummy title</p>
-                <p className="desc">Dummy description</p>
+                <p className="title">{props.title}</p>
+                <p className="desc">{props.desc}</p>
             </div>
         </div>
     )
 }
 export default Post;
-// end-Video #10
+// end-Video #11
