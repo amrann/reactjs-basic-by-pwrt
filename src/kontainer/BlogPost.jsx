@@ -36,7 +36,22 @@ class BlogPost extends Component{
         // })
 
         // Memanggil API dengan menggunakan axios
-        axios.get('http://jsonplaceholder.typicode.com/posts')
+        // axios.get('http://jsonplaceholder.typicode.com/posts')
+        // .then((hasil)=> {
+        //     // console.log(hasil);
+        //     this.setState({
+        //         postingan: hasil.data
+        //     })
+        // })
+
+        /*
+        Menggunakan json-server (https://github.com/typicode/json-server) utk melihat perubahan post/put/delete
+        Cara penggunaannya:
+        - install terlebih dahulu json server : npm install -g json-server
+        - buatkan file json (project ini filenya databes.json)
+        - jalankan server tersebut pada terminal baru : json-server --watch databes.json --port 3004 (perlu menggunakan port baru karena port 3000 sdh digunakan untk menjalankan react-nya
+        */
+        axios.get('http://localhost:3004/posts') // link yg digunakan merupakan link json-server
         .then((hasil)=> {
             // console.log(hasil);
             this.setState({
