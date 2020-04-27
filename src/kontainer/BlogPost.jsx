@@ -25,7 +25,7 @@ class BlogPost extends Component{
         postingan: []
     }
 
-    componentDidMount(){
+    // componentDidMount(){
         // Memanggil API dengan menggunakan fetch
         // fetch('http://jsonplaceholder.typicode.com/posts') // link yang digunakan merupakan link penyedia API dummy
         // .then(response => response.json())
@@ -44,6 +44,7 @@ class BlogPost extends Component{
         //     })
         // })
 
+        // Video ke-12
         /*
         Menggunakan json-server (https://github.com/typicode/json-server) utk melihat perubahan post/put/delete
         Cara penggunaannya:
@@ -51,16 +52,57 @@ class BlogPost extends Component{
         - buatkan file json (project ini filenya databes.json)
         - jalankan server tersebut pada terminal baru : json-server --watch databes.json --port 3004 (perlu menggunakan port baru karena port 3000 sdh digunakan untk menjalankan react-nya
         */
-        axios.get('http://localhost:3004/posts') // link yg digunakan merupakan link json-server
+        // axios.get('http://localhost:3004/posts') // link yg digunakan merupakan link json-server
+        // .then((hasil)=> {
+        //     // console.log(hasil);
+        //     this.setState({
+        //         postingan: hasil.data
+        //     })
+        // })
+        // end-Video ke-12
+
+    // }
+    
+    // render(){
+    //     return(
+    //         <Fragment>
+    //             <p className="section-title">Blog Post</p>
+    //             {
+    //                 // map disni berfungsi sebagai looping
+    //                 this.state.postingan.map(postingan => {
+    //                     return <Post key={postingan.id} title={postingan.title} desc={postingan.body}/>
+    //                     //perlu utk memberikan 'key' tidak terjadi warning pada console browser kita
+    //                 })
+    //             }
+    //         </Fragment>
+    //     )
+    // }
+
+    // Video #13
+    panggilGetPostAPI = () => {
+        axios.get('http://localhost:3004/posts')
         .then((hasil)=> {
             // console.log(hasil);
             this.setState({
                 postingan: hasil.data
             })
         })
-
     }
     
+    handleClickHapus = (data) => {
+        // console.log(data)
+        axios.delete(`http://localhost:3004/posts/${data}`) // link yg digunakan merupakan link json-server
+        .then((hasil)=> {
+            // console.log(hasil);
+            this.panggilGetPostAPI()
+        })
+
+    }
+
+    componentDidMount(){
+        this.panggilGetPostAPI();
+    }
+
     render(){
         return(
             <Fragment>
@@ -68,13 +110,14 @@ class BlogPost extends Component{
                 {
                     // map disni berfungsi sebagai looping
                     this.state.postingan.map(postingan => {
-                        return <Post key={postingan.id} title={postingan.title} desc={postingan.body}/>
+                        return <Post key={postingan.id} dtitlebody={postingan} clickHapus={this.handleClickHapus}/>
                         //perlu utk memberikan 'key' tidak terjadi warning pada console browser kita
                     })
                 }
             </Fragment>
         )
     }
+    // Video #13
 }
 export default BlogPost;
 // end-Video #11

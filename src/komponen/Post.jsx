@@ -17,6 +17,23 @@ import React from 'react';
 // end-Video #10
 
 // Video #11
+// const Post = (props) => { 
+//     return (
+//         <div className="post">
+//             <div className="img-thumb">
+//                 <img src="http://placeimg.com/200/150/tech"/>
+//             </div>
+//             <div className="content">
+//                 <p className="title">{props.title}</p>
+//                 <p className="desc">{props.desc}</p>
+//             </div>
+//         </div>
+//     )
+// }
+// export default Post;
+// end-Video #11
+
+// Video #13
 const Post = (props) => { 
     return (
         <div className="post">
@@ -24,11 +41,12 @@ const Post = (props) => {
                 <img src="http://placeimg.com/200/150/tech"/>
             </div>
             <div className="content">
-                <p className="title">{props.title}</p>
-                <p className="desc">{props.desc}</p>
+                <p className="title">{props.dtitlebody.title}</p>
+                <p className="desc">{props.dtitlebody.body}</p>
+                <button className="bHapus" onClick={()=>props.clickHapus(props.dtitlebody.id)}>Hapus</button>
             </div>
         </div>
     )
 }
 export default Post;
-// end-Video #11
+// end-Video #13
