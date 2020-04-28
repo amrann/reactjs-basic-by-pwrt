@@ -22,7 +22,13 @@ import Post from '../komponen/Post';
 import axios from 'axios';
 class BlogPost extends Component{    
     state = {
-        postingan: []
+        postingan: [],
+        formBlogPost: {
+            id: 1,
+            title: '',
+            body: '',
+            userId: 1
+        }
     }
 
     // componentDidMount(){
@@ -99,6 +105,20 @@ class BlogPost extends Component{
 
     }
 
+    // Method ini berfungsi disaat form mempunyai inputan, sehingga dengan cara seperti itulah kita bisa mendapatkan
+    // value pada form-nya
+    handlePerubahanForm = (event) => {
+        // console.log('form change', event)
+        let formBlogPostNew = {...this.state.formBlogPost} // melukakan duplicate nilai ke formBlogPostNew
+        formBlogPostNew[event.target.name] = event.target.value
+        // [event.target.name] -> 'name' diambil berdasarkan pada form
+        this.setState({
+            formBlogPost: formBlogPostNew
+        }, () => {
+            console.log('value obj formBlogPost: ', this.state.formBlogPost)
+        })
+    }
+
     componentDidMount(){
         this.panggilGetPostAPI();
     }
@@ -107,6 +127,14 @@ class BlogPost extends Component{
         return(
             <Fragment>
                 <p className="section-title">Blog Post</p>
+                {/* Video #14 */}
+                <div className="form-add-post">
+                    <label htmlFor="title">Title</label>
+                    <input type="text" name="title" placeholder="Tambah judul" onChange={this.handlePerubahanForm}/>
+                    <label htmlFor="body">Body content</label>
+                    <textarea name="body" id="body" cols="30" rows="10" placeholder="Tambah konten blog" onChange={this.handlePerubahanForm}></textarea>
+                    <button className="btn-simpan">Simpan</button>
+                </div>
                 {
                     // map disni berfungsi sebagai looping
                     this.state.postingan.map(postingan => {
