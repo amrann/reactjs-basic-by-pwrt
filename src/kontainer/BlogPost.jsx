@@ -86,7 +86,7 @@ class BlogPost extends Component{
 
     // Video #13
     panggilGetPostAPI = () => {
-        axios.get('http://localhost:3004/posts')
+        axios.get('http://localhost:3004/inidataposts?_sort=id&_order=desc')
         .then((hasil)=> {
             // console.log(hasil);
             this.setState({
@@ -94,10 +94,20 @@ class BlogPost extends Component{
             })
         })
     }
+
+    postDataKeAPI = () => {
+        axios.post('http://localhost:3004/inidataposts', this.state.formBlogPost)
+        .then((hasil) => {
+            console.log(hasil);
+            this.panggilGetPostAPI();
+        }, (gagal) => {
+            console.log('gagal: ', gagal);
+        })
+    }
     
     handleClickHapus = (data) => {
         // console.log(data)
-        axios.delete(`http://localhost:3004/posts/${data}`) // link yg digunakan merupakan link json-server
+        axios.delete(`http://localhost:3004/inidataposts/${data}`) // link yg digunakan merupakan link json-server
         .then((hasil)=> {
             // console.log(hasil);
             this.panggilGetPostAPI()
@@ -110,13 +120,18 @@ class BlogPost extends Component{
     handlePerubahanForm = (event) => {
         // console.log('form change', event)
         let formBlogPostNew = {...this.state.formBlogPost} // melukakan duplicate nilai ke formBlogPostNew
+        let timestamp = new Date().getTime();
+        formBlogPostNew['id'] = timestamp // 'id' diisi dengan nilai timestamp
         formBlogPostNew[event.target.name] = event.target.value
         // [event.target.name] -> 'name' diambil berdasarkan pada form
         this.setState({
             formBlogPost: formBlogPostNew
-        }, () => {
-            console.log('value obj formBlogPost: ', this.state.formBlogPost)
         })
+    }
+
+    handleButtonSimpan = () => {
+        // console.log(this.state.formBlogPost);
+        this.postDataKeAPI();
     }
 
     componentDidMount(){
@@ -133,7 +148,7 @@ class BlogPost extends Component{
                     <input type="text" name="title" placeholder="Tambah judul" onChange={this.handlePerubahanForm}/>
                     <label htmlFor="body">Body content</label>
                     <textarea name="body" id="body" cols="30" rows="10" placeholder="Tambah konten blog" onChange={this.handlePerubahanForm}></textarea>
-                    <button className="btn-simpan">Simpan</button>
+                    <button className="btn-simpan" onClick={this.handleButtonSimpan}>Simpan</button>
                 </div>
                 {
                     // map disni berfungsi sebagai looping
