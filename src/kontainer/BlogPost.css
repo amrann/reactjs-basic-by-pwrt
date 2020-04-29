@@ -55,8 +55,18 @@
     margin-top: 10px;
 }
 
-.bHapus:hover {
+.bHapus:hover, .bEdit:hover {
     cursor: pointer;
+}
+
+.bEdit {
+    padding: 7px 9px;
+    background: rgb(30, 165, 64);
+    color: white;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .form-add-post {

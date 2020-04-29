@@ -28,7 +28,10 @@ class BlogPost extends Component{
             title: '',
             body: '',
             userId: 1
-        }
+        },
+        // state ini berfungsi utk membedakan apa yang dipanggil merupakan button simpan utk 'post' atau
+        // button edit untuk 'put'
+        isEdit: false
     }
 
     // componentDidMount(){
@@ -100,8 +103,36 @@ class BlogPost extends Component{
         .then((hasil) => {
             console.log(hasil);
             this.panggilGetPostAPI();
+            this.setState({
+                // Untuk membersihkan inputan setelah submit
+                formBlogPost: {
+                    id: 1,
+                    title: '',
+                    body: '',
+                    userId: 1
+                }
+            })
+            
         }, (gagal) => {
             console.log('gagal: ', gagal);
+        })
+    }
+
+    putDataKeAPI = () => {
+        axios.put(`http://localhost:3004/inidataposts/${this.state.formBlogPost.id}`, this.state.formBlogPost) // link yg digunakan merupakan link json-server
+        .then((hasil)=> {
+            // console.log(hasil);
+            this.panggilGetPostAPI()
+            this.setState({
+                // Untuk membersihkan inputan setelah submit
+                formBlogPost: {
+                    id: 1,
+                    title: '',
+                    body: '',
+                    userId: 1
+                },
+                isEdit: false
+            })
         })
     }
     
@@ -115,13 +146,25 @@ class BlogPost extends Component{
 
     }
 
-    // Method ini berfungsi disaat form mempunyai inputan, sehingga dengan cara seperti itulah kita bisa mendapatkan
-    // value pada form-nya
+    handleClickEdit = (data) => {
+        // console.log(data)
+        this.setState({
+            formBlogPost: data,
+            isEdit: true
+        })
+        
+    }
+
+    // Method ini berfungsi disaat form terjadi perubahan atau mempunyai inputan, sehingga dengan cara seperti itulah kita bisa mendapatkan value pada form-nya
     handlePerubahanForm = (event) => {
         // console.log('form change', event)
         let formBlogPostNew = {...this.state.formBlogPost} // melukakan duplicate nilai ke formBlogPostNew
         let timestamp = new Date().getTime();
-        formBlogPostNew['id'] = timestamp // 'id' diisi dengan nilai timestamp
+        // Jika isEdit bernilai 'false' maka dia memanggil formBlogPostNew['id'] = timestamp
+        if(!this.state.isEdit){
+            // Kondisi ini untk menghindari update 'id' ketika terjadi perubahan input pada kondisi edit
+            formBlogPostNew['id'] = timestamp // 'id' diisi dengan nilai timestamp
+        }
         formBlogPostNew[event.target.name] = event.target.value
         // [event.target.name] -> 'name' diambil berdasarkan pada form
         this.setState({
@@ -131,7 +174,12 @@ class BlogPost extends Component{
 
     handleButtonSimpan = () => {
         // console.log(this.state.formBlogPost);
-        this.postDataKeAPI();
+        // Jika isEdit bernilai 'true' maka dia memanggil putDataKeAPI()
+        if(this.state.isEdit){
+            this.putDataKeAPI();
+        }else{
+            this.postDataKeAPI();
+        }
     }
 
     componentDidMount(){
@@ -145,16 +193,16 @@ class BlogPost extends Component{
                 {/* Video #14 */}
                 <div className="form-add-post">
                     <label htmlFor="title">Title</label>
-                    <input type="text" name="title" placeholder="Tambah judul" onChange={this.handlePerubahanForm}/>
+                    <input type="text" value={this.state.formBlogPost.title} name="title" placeholder="Tambah judul" onChange={this.handlePerubahanForm}/>
                     <label htmlFor="body">Body content</label>
-                    <textarea name="body" id="body" cols="30" rows="10" placeholder="Tambah konten blog" onChange={this.handlePerubahanForm}></textarea>
+                    <textarea name="body" value={this.state.formBlogPost.body} id="body" cols="30" rows="10" placeholder="Tambah konten blog" onChange={this.handlePerubahanForm}></textarea>
                     <button className="btn-simpan" onClick={this.handleButtonSimpan}>Simpan</button>
                 </div>
                 {
                     // map disni berfungsi sebagai looping
                     this.state.postingan.map(postingan => {
-                        return <Post key={postingan.id} dtitlebody={postingan} clickHapus={this.handleClickHapus}/>
-                        //perlu utk memberikan 'key' tidak terjadi warning pada console browser kita
+                        return <Post key={postingan.id} dtitlebody={postingan} clickHapus={this.handleClickHapus} clickEdit={this.handleClickEdit}/>
+                        //perlu utk memberikan 'key' agar tidak terjadi warning pada console browser kita
                     })
                 }
             </Fragment>

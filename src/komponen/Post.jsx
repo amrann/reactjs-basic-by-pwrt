@@ -43,6 +43,8 @@ const Post = (props) => {
             <div className="content">
                 <p className="title">{props.dtitlebody.title}</p>
                 <p className="desc">{props.dtitlebody.body}</p>
+                <button className="bEdit" onClick={()=>props.clickEdit(props.dtitlebody)}>Edit</button>
+                {/* data yang ingin diperlukan bukan cuman 'id' maka dari itu param yg digunakan adalah props.dtitlebody */}
                 <button className="bHapus" onClick={()=>props.clickHapus(props.dtitlebody.id)}>Hapus</button>
             </div>
         </div>
